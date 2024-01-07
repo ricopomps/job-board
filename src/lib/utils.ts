@@ -1,3 +1,5 @@
+import { User } from "@clerk/nextjs/server"; //User from back
+import { UserResource } from "@clerk/types"; //User from front
 import { clsx, type ClassValue } from "clsx";
 import { formatDistanceToNowStrict } from "date-fns";
 import { twMerge } from "tailwind-merge";
@@ -22,4 +24,8 @@ export function toSlug(str: string) {
     .toLocaleLowerCase()
     .replace(/ /g, "-")
     .replace(/[^\w-]+/g, "");
+}
+
+export function isAdmin(user: UserResource | User) {
+  return user.publicMetadata?.role === "admin";
 }
